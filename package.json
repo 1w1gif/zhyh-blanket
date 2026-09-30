@@ -1,0 +1,12 @@
+{
+  "name": "inspiration-wall",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @wall/web",
+    "build": "npm run build --workspace @wall/web"
+  }
+}
