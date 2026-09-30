@@ -8,8 +8,10 @@
     "start": "next start -p 3100"
   },
   "dependencies": {
+    "@types/pg": "^8.23.1",
     "@wall/shared": "*",
     "next": "^15.3.0",
+    "pg": "^8.23.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
