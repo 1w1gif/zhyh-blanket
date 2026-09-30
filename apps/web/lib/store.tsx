@@ -37,7 +37,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch("/api/data", { cache: "no-store" });
         if (!res.ok) throw new Error(String(res.status));
-        const data = await res.json();
+        const data = (await res.json()) as { posts: Post[]; comments: Comment[] };
         setPosts(data.posts);
         setComments(data.comments);
         setSynced(true);
@@ -68,7 +68,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch("/api/data", { cache: "no-store" });
         if (!res.ok) return;
-        const data = await res.json();
+        const data = (await res.json()) as { posts: Post[]; comments: Comment[] };
         setPosts(data.posts);
         setComments(data.comments);
       } catch {
