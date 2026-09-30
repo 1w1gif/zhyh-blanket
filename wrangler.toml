@@ -1,6 +1,0 @@
-# Cloudflare Pages 配置
-# 构建输出到 apps/web/.next(Next.js 由 @cloudflare/next-on-pages 适配)
-# 本项目改用静态导出 + Functions 方案,见 functions/ 目录
-name = "zhyh-blanket"
-compatibility_date = "2024-12-01"
-pages_build_output_dir = "apps/web/.next"
