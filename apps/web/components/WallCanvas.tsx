@@ -35,8 +35,9 @@ export function WallCanvas({ wall, onCompose }: { wall: WallKind; onCompose: () 
     const rect = vp.getBoundingClientRect();
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
+    const scale = e.deltaY < 0 ? 1.12 : 1 / 1.12;
     setView((v) => {
-      const k = Math.min(2.5, Math.max(0.3, v.k * (e.deltaY < 0 ? 1.12 : 1 / 1.12)));
+      const k = Math.min(2.5, Math.max(0.3, v.k * scale));
       // 以鼠标位置为锚点缩放
       return {
         k,
@@ -54,11 +55,15 @@ export function WallCanvas({ wall, onCompose }: { wall: WallKind; onCompose: () 
     setDragging(true);
   }
   function onPointerMove(e: React.PointerEvent) {
-    if (!drag.current) return;
-    const dx = e.clientX - drag.current.sx;
-    const dy = e.clientY - drag.current.sy;
+    const d = drag.current;
+    if (!d) return;
+    const dx = e.clientX - d.sx;
+    const dy = e.clientY - d.sy;
     if (Math.abs(dx) + Math.abs(dy) > 4) moved.current = true;
-    setView((v) => ({ ...v, x: drag.current!.vx + dx, y: drag.current!.vy + dy }));
+    // 先算好目标值再进 updater:updater 可能被 React 重放,不能引用会被置空的 ref
+    const nx = d.vx + dx;
+    const ny = d.vy + dy;
+    setView((v) => ({ ...v, x: nx, y: ny }));
   }
   function onPointerUp() {
     drag.current = null;
@@ -72,11 +77,10 @@ export function WallCanvas({ wall, onCompose }: { wall: WallKind; onCompose: () 
     if (!vp) return;
     const w = vp.clientWidth;
     const h = vp.clientHeight;
-    setView({
-      k: 1.35,
-      x: w / 2 - (p.x + 120) * 1.35,
-      y: h / 2 - (p.y + 110) * 1.35,
-    });
+    const k = 1.35;
+    const nx = w / 2 - (p.x + 120) * k;
+    const ny = h / 2 - (p.y + 110) * k;
+    setView((v) => ({ ...v, k, x: nx, y: ny }));
     setTimeout(() => setFocusId(p.id), 280);
   }
 
