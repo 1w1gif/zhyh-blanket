@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace @wall/web",
-    "build": "npm run build --workspace @wall/web && npx @cloudflare/next-on-pages@1",
-    "pages:build": "npx @cloudflare/next-on-pages@1"
+    "build": "npm run build --workspace @wall/web",
+    "cfbuild": "npx @cloudflare/next-on-pages@1"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",
