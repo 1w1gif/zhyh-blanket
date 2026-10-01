@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getPool, SCHEMA_SQL } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 // 更新帖子:支持可见性/状态/坐标/点赞等局部字段
 export async function PATCH(req: NextRequest) {

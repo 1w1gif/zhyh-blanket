@@ -3,6 +3,7 @@ import { getPool, SCHEMA_SQL } from "@/lib/db";
 import { Post } from "@wall/shared";
 
 export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 // 新建帖子
 export async function POST(req: NextRequest) {

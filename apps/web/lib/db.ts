@@ -1,6 +1,7 @@
 // 服务端数据库访问(仅 API 路由使用)
 // 没配 DATABASE_URL 时为 null,API 返回 503,前端自动降级到 localStorage
-import { Pool } from "pg";
+// 用 Neon serverless 驱动(WebSocket),Cloudflare Workers 的 edge 运行时没有原生 TCP,pg 用不了
+import { Pool } from "@neondatabase/serverless";
 
 declare global {
   // eslint-disable-next-line no-var
@@ -12,8 +13,6 @@ export function getPool(): Pool | null {
   if (!globalThis.__pool) {
     globalThis.__pool = new Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false },
-      max: 5,
     });
   }
   return globalThis.__pool;

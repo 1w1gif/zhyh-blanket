@@ -3,6 +3,7 @@ import { getPool, SCHEMA_SQL } from "@/lib/db";
 import { Comment, Post } from "@wall/shared";
 
 export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 // 全量拉取(六人小站,数据量小,一次全拿最简单可靠)
 export async function GET() {
