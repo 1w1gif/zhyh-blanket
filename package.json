@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "npm run dev --workspace @wall/web",
     "build": "npm run build --workspace @wall/web",
-    "cfbuild": "node scripts/cfbuild.mjs"
+    "cfbuild": "node scripts/cfbuild.mjs",
+    "cfdeploy": "wrangler pages deploy .vercel/output/static --project-name zhyh-blanket --branch main --commit-dirty=true"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",
