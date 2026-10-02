@@ -60,14 +60,16 @@ export const STATUS_TAG_STYLE: Record<Exclude<DevStatus, "none">, string> = {
 
 export const uid = () => Math.random().toString(36).slice(2, 10);
 
-// ---------- 成员 ----------
+// ---------- 用户 ----------
+// 不设固定成员名单(保护隐私),名字由用户自己输入;颜色按名字哈希确定性分配
 
-export const MEMBERS = ["张奶航", "陈奕衡", "王嘉昊", "潘旭", "蒋思成", "葛昱嘉"];
-
-export function memberColor(name: string) {
-  const i = MEMBERS.indexOf(name);
-  return PAPER_COLORS[(i < 0 ? 0 : i) % PAPER_COLORS.length];
+export function pickPaperColor(name: string) {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+  return PAPER_COLORS[h % PAPER_COLORS.length];
 }
+
+export const memberColor = pickPaperColor; // 兼容旧引用
 
 // ---------- Mock 数据 ----------
 

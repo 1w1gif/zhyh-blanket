@@ -99,23 +99,39 @@ input, textarea { font-family: inherit; }
   font-size: 14px;
 }
 
-.login-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+
+.login-inputrow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
 }
 
-.login-btn {
+.login-input {
+  flex: 1;
+  max-width: 340px;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 13px 14px;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: #fff;
+  outline: none;
+}
+.login-input:focus { box-shadow: 6px 6px 0 var(--pink); }
+.login-input::placeholder { color: rgba(17, 17, 17, 0.35); font-weight: normal; }
+
+.login-go {
   font-family: var(--font-display);
   font-size: 17px;
-  padding: 14px 6px;
+  padding: 13px 22px;
   border: var(--border);
   box-shadow: var(--shadow);
   transition: transform 0.15s, box-shadow 0.15s;
   animation: slam-in 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) backwards;
 }
-.login-btn:hover { transform: translate(-3px, -3px) rotate(0deg) !important; box-shadow: 9px 9px 0 var(--ink); }
-.login-btn:active { transform: translate(3px, 3px) !important; box-shadow: 2px 2px 0 var(--ink); }
+.login-go:hover:not(:disabled) { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+.login-go:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
+.login-go:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .login-note { margin-top: 18px; font-size: 12px; opacity: 0.6; }
 
@@ -588,5 +604,6 @@ input, textarea { font-family: inherit; }
   .kanban-title { font-size: 26px; }
   .modal-mask { padding: 10px; align-items: flex-end; }
   .panel { max-height: 82vh; }
-  .login-grid { grid-template-columns: repeat(2, 1fr); }
+  .login-inputrow { flex-direction: column; align-items: stretch; }
+  .login-input { max-width: none; }
 }
